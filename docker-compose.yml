@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  net6cqrstemplate.api:
+    image: ${DOCKER_REGISTRY-}net6cqrstemplateapi
+    build:
+      context: .
+      dockerfile: Net6CqrsTemplate.API/Dockerfile
