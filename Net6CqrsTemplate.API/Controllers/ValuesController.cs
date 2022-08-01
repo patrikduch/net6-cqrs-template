@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Net6CqrsTemplate.Application.Dtos;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,9 +11,22 @@ namespace Net6CqrsTemplate.API.Controllers
     {
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<ValueItemDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new ValueItemDto[] { 
+
+                new ValueItemDto
+                {
+                    Id = 1,
+                    Name = "Value one"
+                },
+
+                new ValueItemDto {
+                
+                    Id = 2,
+                    Name = "Value two"
+                }
+            };
         }
 
         // GET api/<ValuesController>/5
