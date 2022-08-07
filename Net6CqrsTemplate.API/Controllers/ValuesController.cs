@@ -13,12 +13,10 @@ namespace Net6CqrsTemplate.API.Controllers
     public class ValuesController : ControllerBase
     {
 
-        private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public ValuesController(IMapper mapper, IMediator mediator)
+        public ValuesController(IMediator mediator)
         {
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
@@ -42,9 +40,18 @@ namespace Net6CqrsTemplate.API.Controllers
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ValueItemDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ValueItemDto?>> Get(int id)
         {
-            return "value";
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+
+            var valueItem = await _mediator.Send(new GetValueItemRequest { ValueItemId = id });
+
+            return Ok(valueItem);
         }
 
         // POST api/<ValuesController>

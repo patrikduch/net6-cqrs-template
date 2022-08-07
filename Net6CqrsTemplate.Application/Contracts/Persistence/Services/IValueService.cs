@@ -5,5 +5,6 @@ namespace Net6CqrsTemplate.Application.Contracts.Persistence.Services
     public interface IValueService
     {
         IEnumerable<ValueItemDto> GetValueList();
+        Task<ValueItemDto?> GetValueItem(int id);
     }
 }

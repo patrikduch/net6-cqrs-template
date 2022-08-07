@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Net6CqrsTemplate.Application\Net6CqrsTemplate.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Readers\" />
+    <Folder Include="Writers\" />
+  </ItemGroup>
+
 </Project>

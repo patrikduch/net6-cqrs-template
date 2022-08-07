@@ -5,16 +5,38 @@ namespace Net6CqrsTemplate.Persistence.Services
 {
     public class ValueService : IValueService
     {
-        public IEnumerable<ValueItemDto> GetValueList()
+
+        private readonly IEnumerable<ValueItemDto> _items;
+
+
+        public ValueService()
         {
-            return new List<ValueItemDto>()
+            _items = new List<ValueItemDto>
             {
                 new ValueItemDto
                 {
                     Id = 1,
                     Name = "Value one"
+                },
+
+                new ValueItemDto
+                {
+                    Id = 2,
+                    Name = "Value two"
                 }
             };
+        }
+
+        public Task<ValueItemDto?> GetValueItem(int id)
+        {
+
+            var resultItem = _items.FirstOrDefault(x => x.Id == id);
+            return Task.FromResult(resultItem);
+        }
+
+        public IEnumerable<ValueItemDto> GetValueList()
+        {
+            return _items;
         }
     }
 }
