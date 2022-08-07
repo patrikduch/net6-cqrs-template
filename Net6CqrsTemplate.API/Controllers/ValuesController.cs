@@ -24,6 +24,8 @@ namespace Net6CqrsTemplate.API.Controllers
 
         // GET: api/<ValuesController>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ValueItemDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<ValueItemDto?>>> Get()
         {
             var valueList= await _mediator.Send(new GetValueListRequest());
