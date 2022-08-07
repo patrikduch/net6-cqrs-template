@@ -13,11 +13,12 @@ namespace Net6CqrsTemplate.API.Controllers
     public class ValuesController : ControllerBase
     {
 
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public ValuesController(IMediator mediator)
+        public ValuesController(IMapper mapper, IMediator mediator)
         {
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
