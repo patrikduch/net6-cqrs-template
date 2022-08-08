@@ -1,8 +1,13 @@
 version: '3.4'
 
 services:
+  net6cqrstemplate.db:
+    image: mcr.microsoft.com/mssql/server:2017-latest
   net6cqrstemplate.api:
     image: ${DOCKER_REGISTRY-}net6cqrstemplateapi
     build:
       context: .
       dockerfile: Net6CqrsTemplate.API/Dockerfile
+
+volumes:
+  sqlvolume:

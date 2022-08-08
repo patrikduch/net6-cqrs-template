@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\Persistence\Writters\" />
-    <Folder Include="Contracts\Persistence\Readers\" />
     <Folder Include="Features\Value\Handlers\Commands\" />
     <Folder Include="Features\Value\Requests\Commands\" />
   </ItemGroup>

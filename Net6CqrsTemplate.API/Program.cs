@@ -3,6 +3,9 @@ using Net6CqrsTemplate.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("appsettings.json", false, true);
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -10,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureApplicationServices();
-builder.Services.ConfigurePersistenceServices();
+builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
 var app = builder.Build();
 

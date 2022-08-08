@@ -56,20 +56,16 @@ namespace Net6CqrsTemplate.API.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ValueItemDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<ValueItemDto> CreateValueItem([FromBody] ValueItemDto valueItemDto)
         {
-        }
+            if (valueItemDto is null)
+            {
+                return BadRequest();
+            }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok();
         }
     }
 }

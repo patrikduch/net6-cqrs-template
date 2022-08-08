@@ -16,10 +16,7 @@ namespace Net6CqrsTemplate.Application.Features.Value.Handlers.Queries
 
         public Task<IEnumerable<ValueItemDto>> Handle(GetValueListRequest request, CancellationToken cancellationToken)
         {
-
-            var resultList = _valueService.GetValueList();
-
-            return Task.FromResult(resultList);
+            return _valueService.GetValueList();
         }
     }
 }

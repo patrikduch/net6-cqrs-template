@@ -1,42 +1,34 @@
-﻿using Net6CqrsTemplate.Application.Contracts.Persistence.Services;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Net6CqrsTemplate.Application.Contracts.Persistence.Services;
 using Net6CqrsTemplate.Application.Dtos;
+using Net6CqrsTemplate.Persistence.DbContexts;
 
 namespace Net6CqrsTemplate.Persistence.Services
 {
     public class ValueService : IValueService
     {
 
-        private readonly IEnumerable<ValueItemDto> _items;
+        private readonly ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-
-        public ValueService()
+        public ValueService(ApplicationDbContext dbContext, IMapper mapper)
         {
-            _items = new List<ValueItemDto>
-            {
-                new ValueItemDto
-                {
-                    Id = 1,
-                    Name = "Value one"
-                },
-
-                new ValueItemDto
-                {
-                    Id = 2,
-                    Name = "Value two"
-                }
-            };
+            _dbContext = dbContext ?? throw new ArgumentException(nameof(dbContext));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public Task<ValueItemDto?> GetValueItem(int id)
-        {
 
-            var resultItem = _items.FirstOrDefault(x => x.Id == id);
-            return Task.FromResult(resultItem);
+        public async Task<ValueItemDto?> GetValueItem(int id)
+        {
+            var getValueItemQuery = _dbContext.ValueEntities.Where(v => v.Id == id);
+            return await _mapper.ProjectTo<ValueItemDto>(getValueItemQuery).SingleOrDefaultAsync();
         }
 
-        public IEnumerable<ValueItemDto> GetValueList()
+        public async Task<IEnumerable<ValueItemDto>> GetValueList()
         {
-            return _items;
+            var getValueListQuery = _dbContext.ValueEntities;
+            return await _mapper.ProjectTo<ValueItemDto>(getValueListQuery).ToListAsync();
         }
     }
 }
