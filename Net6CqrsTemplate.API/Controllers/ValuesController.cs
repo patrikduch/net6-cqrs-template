@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Net6CqrsTemplate.Application.Dtos;
 using Net6CqrsTemplate.Application.Features.Value.Requests.Queries;
@@ -12,14 +11,12 @@ namespace Net6CqrsTemplate.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-
         private readonly IMediator _mediator;
 
         public ValuesController(IMediator mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
-
 
         // GET: api/<ValuesController>
         [HttpGet]
@@ -35,7 +32,6 @@ namespace Net6CqrsTemplate.API.Controllers
             }
 
             return Ok(valueList);
-
         }
 
         // GET api/<ValuesController>/5
