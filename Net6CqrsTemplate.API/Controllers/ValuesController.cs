@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Net6CqrsTemplate.Application.Dtos;
+using Net6CqrsTemplate.Application.Dtos.Value.Requests;
+using Net6CqrsTemplate.Application.Features.Value.Requests.Commands;
 using Net6CqrsTemplate.Application.Features.Value.Requests.Queries;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,7 +26,7 @@ namespace Net6CqrsTemplate.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<ValueItemDto?>>> Get()
         {
-            var valueList= await _mediator.Send(new GetValueListRequest());
+            var valueList = await _mediator.Send(new GetValueListRequest());
 
             if (valueList is null)
             {
@@ -52,16 +54,34 @@ namespace Net6CqrsTemplate.API.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ValueItemDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<ValueItemDto> CreateValueItem([FromBody] ValueItemDto valueItemDto)
+        public async Task<IActionResult> CreateValueItem([FromBody] InsertValueItemRequestDto valueItemDto)
         {
             if (valueItemDto is null)
             {
                 return BadRequest();
             }
 
-            return Ok();
+            var newValueItemId = await _mediator.Send(new CreateValueItemCommand { InsertValueItemRequestDto = valueItemDto });
+
+            return Ok(newValueItemId);
+        }
+
+        // PUT api/<ValuesController>
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateValueItem([FromBody] UpdateValueItemRequestDto valueItemDto)
+        {
+            if (valueItemDto is null)
+            {
+                return BadRequest();
+            }
+
+            var newValueItemId = await _mediator.Send(new UpdateValueItemCommand { UpdateValueItemRequestDto = valueItemDto });
+
+            return Ok(newValueItemId);
         }
     }
 }

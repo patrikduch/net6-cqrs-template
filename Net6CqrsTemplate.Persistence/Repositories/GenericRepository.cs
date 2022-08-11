@@ -1,32 +1,56 @@
-﻿using Net6CqrsTemplate.Application.Contracts.Persistence;
+﻿using Microsoft.EntityFrameworkCore;
+using Net6CqrsTemplate.Application.Contracts.Persistence;
+using Net6CqrsTemplate.Persistence.DbContexts;
+using System.Linq.Expressions;
 
 namespace Net6CqrsTemplate.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public Task<T> Add(T entity)
+        private readonly ApplicationDbContext _applicationDbContext;
+
+        public GenericRepository(ApplicationDbContext applicationDbContext)
         {
-            throw new NotImplementedException();
+            _applicationDbContext = applicationDbContext ?? throw new ArgumentNullException(nameof(ApplicationDbContext));
         }
 
-        public Task<T> Delete(T entity)
+        public async Task<T> Add(T entity)
         {
-            throw new NotImplementedException();
+            await _applicationDbContext.AddAsync(entity);
+            return entity;
         }
 
-        public Task<T> Get(int id)
+        public async Task<bool> Exists(int id)
         {
-            throw new NotImplementedException();
+            var entity = await Get(id);
+            return entity != null;
         }
 
-        public Task<IReadOnlyList<T>> GetAll()
+        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _applicationDbContext.Set<T>().Where(predicate);
         }
 
-        public Task<T> Update(T entity)
+        public async Task<T> Get(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _applicationDbContext.Set<T>().FindAsync(id);
+
+            if (entity is null)
+            {
+                throw new NullReferenceException("No data were fetched from Entity");
+            }
+
+            return entity;
+        }
+
+        public async Task<IReadOnlyList<T>> GetAll()
+        {
+            return await _applicationDbContext.Set<T>().ToListAsync();
+        }
+
+        public void Remove(T entity)
+        {
+            _applicationDbContext.Remove(entity);
         }
     }
 }

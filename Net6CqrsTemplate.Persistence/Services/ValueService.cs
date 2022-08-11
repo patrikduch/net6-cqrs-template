@@ -1,34 +1,41 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+using Net6CqrsTemplate.Application.Contracts.Persistence.Readers;
 using Net6CqrsTemplate.Application.Contracts.Persistence.Services;
+using Net6CqrsTemplate.Application.Contracts.Persistence.Writters;
 using Net6CqrsTemplate.Application.Dtos;
-using Net6CqrsTemplate.Persistence.DbContexts;
+using Net6CqrsTemplate.Application.Dtos.Value.Requests;
 
 namespace Net6CqrsTemplate.Persistence.Services
 {
     public class ValueService : IValueService
     {
-
-        private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IValueReader _valueReader;
+        private readonly IValueWriter _valueWriter;
 
-        public ValueService(ApplicationDbContext dbContext, IMapper mapper)
+        public ValueService(IMapper mapper, IValueReader valueReader, IValueWriter valueWriter)
         {
-            _dbContext = dbContext ?? throw new ArgumentException(nameof(dbContext));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _valueReader = valueReader ?? throw new ArgumentNullException(nameof(valueReader));
+            _valueWriter = valueWriter ?? throw new ArgumentNullException(nameof(valueWriter));
         }
 
+        public async Task<ValueItemDto> CreateNewValues(InsertValueItemRequestDto newValueDto)
+        {
+            var newValueItem = await _valueWriter.CreateNewValueItem(newValueDto);
+            return _mapper.Map<ValueItemDto>(newValueItem);
+        }
 
         public async Task<ValueItemDto?> GetValueItem(int id)
         {
-            var getValueItemQuery = _dbContext.ValueEntities.Where(v => v.Id == id);
-            return await _mapper.ProjectTo<ValueItemDto>(getValueItemQuery).SingleOrDefaultAsync();
+            var getValueItemQuery = await _valueReader.ReadValueById(id);
+            return _mapper.Map<ValueItemDto>(getValueItemQuery);
         }
 
         public async Task<IEnumerable<ValueItemDto>> GetValueList()
         {
-            var getValueListQuery = _dbContext.ValueEntities;
-            return await _mapper.ProjectTo<ValueItemDto>(getValueListQuery).ToListAsync();
+            var valuesList = await _valueReader.ReadAllValues();
+            return _mapper.Map<IEnumerable<ValueItemDto>>(valuesList);
         }
     }
 }

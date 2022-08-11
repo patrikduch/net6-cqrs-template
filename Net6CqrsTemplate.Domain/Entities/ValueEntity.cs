@@ -1,6 +1,8 @@
-﻿namespace Net6CqrsTemplate.Domain.Entities
+﻿using Net6CqrsTemplate.Domain.Entities.Common;
+
+namespace Net6CqrsTemplate.Domain.Entities
 {
-    public class ValueEntity
+    public class ValueEntity : BaseDomainEntity
     {
         public int Id { get; set; }
 

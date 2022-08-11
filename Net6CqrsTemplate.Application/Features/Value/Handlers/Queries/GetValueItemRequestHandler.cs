@@ -5,7 +5,7 @@ using Net6CqrsTemplate.Application.Features.Value.Requests.Queries;
 
 namespace Net6CqrsTemplate.Application.Features.Value.Handlers.Queries
 {
-    public class GetValueItemRequestHandler : IRequestHandler<GetValueItemRequest, ValueItemDto>
+    public class GetValueItemRequestHandler : IRequestHandler<GetValueItemRequest, ValueItemDto?>
     {
         private readonly IValueService _valueService;
 
@@ -14,7 +14,7 @@ namespace Net6CqrsTemplate.Application.Features.Value.Handlers.Queries
             _valueService = valueService;   
         }
 
-        public Task<ValueItemDto> Handle(GetValueItemRequest request, CancellationToken cancellationToken)
+        public Task<ValueItemDto?> Handle(GetValueItemRequest request, CancellationToken cancellationToken)
         {
             var resultEntity = _valueService.GetValueItem(request.ValueItemId);
 
