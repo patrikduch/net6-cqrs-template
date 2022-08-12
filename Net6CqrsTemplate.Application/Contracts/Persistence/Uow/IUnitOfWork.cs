@@ -3,7 +3,6 @@
     public interface IUnitOfWork : IDisposable
     {
         public IValueRepository ValueRepository { get; set; }
-
         Task<int> Complete();
     }
 }

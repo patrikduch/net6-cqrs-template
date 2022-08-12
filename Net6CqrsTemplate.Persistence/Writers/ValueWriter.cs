@@ -17,7 +17,7 @@ namespace Net6CqrsTemplate.Persistence.Writers
             _uow =  uow ?? throw new ArgumentNullException(nameof(uow));
         }
 
-        public async Task<ValueEntity> CreateNewValueItem(InsertValueItemRequestDto newValueItem)
+        public async Task<ValueEntity?> CreateNewValueItem(InsertValueItemRequestDto newValueItem)
         {
             var valueEntity = _mapper.Map<ValueEntity>(newValueItem);
             valueEntity = await _uow.ValueRepository.Add(valueEntity);
@@ -28,6 +28,21 @@ namespace Net6CqrsTemplate.Persistence.Writers
             {
                 throw new Exception("New data cannot be saved.");
             }
+
+            return valueEntity;
+        }
+
+        public async Task<ValueEntity> RemoveValueItem(int valueItemId)
+        {
+            var valueEntity = await _uow.ValueRepository.Get(valueItemId);
+
+            if (valueEntity is null)
+            {
+                throw new Exception("Cannot find entity with id: " + valueItemId);
+            }
+
+            _uow.ValueRepository.Remove(valueEntity);
+            await _uow.Complete();
 
             return valueEntity;
         }
