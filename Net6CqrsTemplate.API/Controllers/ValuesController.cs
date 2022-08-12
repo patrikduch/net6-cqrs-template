@@ -24,7 +24,7 @@ namespace Net6CqrsTemplate.API.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ValueItemDto>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<ValueItemDto?>>> Get()
+        public async Task<IActionResult> Get()
         {
             var valueList = await _mediator.Send(new GetValueListRequest());
 
@@ -40,7 +40,7 @@ namespace Net6CqrsTemplate.API.Controllers
         [HttpGet("{valueItemId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ValueItemDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ValueItemDto?>> Get(int valueItemId)
+        public async Task<IActionResult> Get(int valueItemId)
         {
             if (valueItemId == 0)
             {
