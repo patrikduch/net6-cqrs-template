@@ -68,18 +68,18 @@ namespace Net6CqrsTemplate.API.Controllers
             return Ok(newValueItemId);
         }
 
-        // PUT api/<ValuesController>
-        [HttpPut]
+        // PUT api/<ValuesController>/1
+        [HttpPut("{valueItemId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateValueItem([FromBody] UpdateValueItemRequestDto valueItemDto)
+        public async Task<IActionResult> UpdateValueItem(int valueItemId, [FromBody] UpdateValueItemRequestDto valueItemDto)
         {
             if (valueItemDto is null)
             {
                 return BadRequest();
             }
 
-            var newValueItemId = await _mediator.Send(new UpdateValueItemCommand { UpdateValueItemRequestDto = valueItemDto });
+            var newValueItemId = await _mediator.Send(new UpdateValueItemCommand { ValueItemId = valueItemId, UpdateValueItemRequestDto = valueItemDto });
 
             return Ok(newValueItemId);
         }

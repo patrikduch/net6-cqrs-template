@@ -16,7 +16,7 @@ namespace Net6CqrsTemplate.Application.Features.Value.Handlers.Commands
 
         public async Task<int> Handle(UpdateValueItemCommand request, CancellationToken cancellationToken)
         {
-            var resultEntity = await _valueWriter.UpdateValueItem(request.UpdateValueItemRequestDto);
+            var resultEntity = await _valueWriter.UpdateValueItem(request.ValueItemId, request.UpdateValueItemRequestDto);
             if (resultEntity == null) throw new Exception("Update wasnt successfull.");
 
             return resultEntity.Id;

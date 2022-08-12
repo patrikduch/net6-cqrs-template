@@ -47,9 +47,9 @@ namespace Net6CqrsTemplate.Persistence.Writers
             return valueEntity;
         }
 
-        public async Task<ValueEntity?> UpdateValueItem(UpdateValueItemRequestDto newValueItem)
+        public async Task<ValueEntity?> UpdateValueItem(int valueItemId, UpdateValueItemRequestDto? newValueItem)
         {
-            var valueEntity = await _uow.ValueRepository.Get(newValueItem.Id);
+            var valueEntity = await _uow.ValueRepository.Get(valueItemId);
 
             if (valueEntity is null) throw new Exception("Entity with this id doesnt exists.");
 
