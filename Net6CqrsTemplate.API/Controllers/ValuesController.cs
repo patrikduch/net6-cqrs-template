@@ -83,5 +83,22 @@ namespace Net6CqrsTemplate.API.Controllers
 
             return Ok(newValueItemId);
         }
+
+        // DEL api/<ValuesController>/1
+        [HttpDelete("{valueItemId}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteValueItem(int valueItemId)
+        {
+   
+            if (valueItemId <= 0)
+            {
+                return BadRequest();
+            }
+
+            var newValueItemId = await _mediator.Send(new DeleteValueItemCommand { ValueItemId = valueItemId });
+
+            return Ok(newValueItemId);
+        }
     }
 }
