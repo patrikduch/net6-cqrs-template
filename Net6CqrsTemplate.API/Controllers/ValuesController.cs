@@ -37,17 +37,17 @@ namespace Net6CqrsTemplate.API.Controllers
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{valueItemId}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ValueItemDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ValueItemDto?>> Get(int id)
+        public async Task<ActionResult<ValueItemDto?>> Get(int valueItemId)
         {
-            if (id == 0)
+            if (valueItemId == 0)
             {
                 return BadRequest();
             }
 
-            var valueItem = await _mediator.Send(new GetValueItemRequest { ValueItemId = id });
+            var valueItem = await _mediator.Send(new GetValueItemRequest { ValueItemId = valueItemId });
 
             return Ok(valueItem);
         }
