@@ -16,7 +16,8 @@ services:
   net6cqrstemplate.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "DatabaseSettings__ConnectionString=Server=net6cqrstemplatedb;Database=dbtest;User Id=sa;Password=SwN12345678;"
+      - "DatabaseSettings:ConnectionString=Server=net6cqrstemplatedb;Database=dbtest;User Id=sa;Password=SwN12345678;"
+      - "ConnectionStrings__TestConnectionString=test"
     ports:
       - "80"
     depends_on:
