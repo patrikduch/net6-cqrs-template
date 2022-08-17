@@ -25,8 +25,7 @@ namespace Net6CqrsTemplate.Persistence
 
 
             #region DatabaseSettings setup
-            var connectionString = configuration["DatabaseSettings:ConnectionString"];
-            var test = configuration.GetConnectionString("TestConnectionString");
+            var connectionString = configuration.GetConnectionString("TestConnectionString");
             #endregion
 
 
