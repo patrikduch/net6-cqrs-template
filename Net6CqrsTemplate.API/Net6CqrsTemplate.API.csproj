@@ -16,11 +16,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.1" />
+    <PackageReference Include="SharpZipLib" Version="1.3.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Net6CqrsTemplate.Application\Net6CqrsTemplate.Application.csproj" />
+    <ProjectReference Include="..\Net6CqrsTemplate.Infrastructure\Net6CqrsTemplate.Infrastructure.csproj" />
     <ProjectReference Include="..\Net6CqrsTemplate.Persistence\Net6CqrsTemplate.Persistence.csproj" />
   </ItemGroup>
 

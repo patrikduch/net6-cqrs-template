@@ -1,4 +1,5 @@
 using Net6CqrsTemplate.Application;
+using Net6CqrsTemplate.Infrastructure;
 using Net6CqrsTemplate.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
+builder.Services.ConfigureInfrastructureServices();
 
 var app = builder.Build();
 
