@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net6CqrsTemplate.Persistence", "Net6CqrsTemplate.Persistence\Net6CqrsTemplate.Persistence.csproj", "{5029F62E-27F8-4272-8CB3-7FC32DC96D22}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net6CqrsTemplate.Infrastructure", "Net6CqrsTemplate.Infrastructure\Net6CqrsTemplate.Infrastructure.csproj", "{C76190D6-8B70-4004-8D93-D20F5371B3E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{5029F62E-27F8-4272-8CB3-7FC32DC96D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5029F62E-27F8-4272-8CB3-7FC32DC96D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5029F62E-27F8-4272-8CB3-7FC32DC96D22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C76190D6-8B70-4004-8D93-D20F5371B3E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C76190D6-8B70-4004-8D93-D20F5371B3E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C76190D6-8B70-4004-8D93-D20F5371B3E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C76190D6-8B70-4004-8D93-D20F5371B3E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 		{77793FFC-C348-40F8-B5F3-51E72F842283} = {11FCF548-EB18-47F4-9082-5F3BF671C133}
 		{AC7EF673-5795-4F4C-B5BA-74DEADD21542} = {11FCF548-EB18-47F4-9082-5F3BF671C133}
 		{5029F62E-27F8-4272-8CB3-7FC32DC96D22} = {B41BB705-F5FF-484E-87C8-4F414E57C4CB}
+		{C76190D6-8B70-4004-8D93-D20F5371B3E0} = {B41BB705-F5FF-484E-87C8-4F414E57C4CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAA61EB2-5F3B-40E0-9C1A-C4A9EAA38664}

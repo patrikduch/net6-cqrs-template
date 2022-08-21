@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Net6CqrsTemplate.Domain\Net6CqrsTemplate.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\ZipFile\Requests\" />
+    <Folder Include="Features\ZipFile\Handlers\Queries\" />
+    <Folder Include="Features\ZipFile\Requests\Queries\" />
+  </ItemGroup>
+
 </Project>
