@@ -20,8 +20,8 @@
 
   <ItemGroup>
     <Folder Include="Dtos\ZipFile\Requests\" />
-    <Folder Include="Features\ZipFile\Handlers\Queries\" />
-    <Folder Include="Features\ZipFile\Requests\Queries\" />
+    <Folder Include="Mediator\Zipfile\Queries\" />
+    <Folder Include="Usecases\Zipfile\Queries\" />
   </ItemGroup>
 
 </Project>

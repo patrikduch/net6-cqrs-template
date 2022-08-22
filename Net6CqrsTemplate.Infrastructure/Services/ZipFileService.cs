@@ -32,11 +32,14 @@ public class ZipFileService : IZipFileService
             {
                 fileList.Add(file);
             }
-            
+
+            string directoryA = "Root/A";
+            string directoryB = "Root/B";
+
 
             for (int i = 0; i < fileList.Count; i++)
             {
-                ZipEntry entry = new ZipEntry(Path.GetFileName(fileList[i]));
+                ZipEntry entry = new ZipEntry("/blabla/" + Path.GetFileName(fileList[i]));
                 entry.DateTime = DateTime.Now;
                 entry.IsUnicodeText = true;
                 IzipOutputStream.PutNextEntry(entry);

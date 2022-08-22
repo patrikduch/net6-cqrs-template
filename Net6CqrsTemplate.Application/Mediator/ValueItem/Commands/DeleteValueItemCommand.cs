@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Net6CqrsTemplate.Application.Features.Value.Requests.Commands
+namespace Net6CqrsTemplate.Application.Mediator.ValueItem.Commands
 {
     public class DeleteValueItemCommand : IRequest<int?>
     {

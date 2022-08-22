@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Net6CqrsTemplate.Application.Dtos;
 using Net6CqrsTemplate.Application.Dtos.Value.Requests;
-using Net6CqrsTemplate.Application.Features.Value.Requests.Commands;
-using Net6CqrsTemplate.Application.Features.Value.Requests.Queries;
+using Net6CqrsTemplate.Application.Mediator.ValueItem.Commands;
+using Net6CqrsTemplate.Application.Mediator.ValueItem.Queries;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

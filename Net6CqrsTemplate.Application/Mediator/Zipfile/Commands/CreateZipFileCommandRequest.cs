@@ -1,4 +1,4 @@
-﻿namespace Net6CqrsTemplate.Application.Features.ZipFile.Requests.Commands;
+﻿namespace Net6CqrsTemplate.Application.Mediator.Zipfile.Commands;
 
 using MediatR;
 using Net6CqrsTemplate.Application.Dtos.Zip;

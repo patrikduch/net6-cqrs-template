@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Net6CqrsTemplate.Application.Contracts.Persistence.Writters;
-using Net6CqrsTemplate.Application.Features.Value.Requests.Commands;
+using Net6CqrsTemplate.Application.Mediator.ValueItem.Commands;
 
-namespace Net6CqrsTemplate.Application.Features.Value.Handlers.Commands
+namespace Net6CqrsTemplate.Application.Usecases.ValueItem.Commands
 {
     public class DeleteValueItemCommandHandler : IRequestHandler<DeleteValueItemCommand, int?>
     {

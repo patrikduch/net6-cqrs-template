@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Net6CqrsTemplate.Application.Dtos.Zip;
 using Net6CqrsTemplate.Application.Dtos.ZipFile.Commands;
-using Net6CqrsTemplate.Application.Features.ZipFile.Requests.Commands;
+using Net6CqrsTemplate.Application.Mediator.Zipfile.Commands;
 
 [Route("api/[controller]")]
 [ApiController]
