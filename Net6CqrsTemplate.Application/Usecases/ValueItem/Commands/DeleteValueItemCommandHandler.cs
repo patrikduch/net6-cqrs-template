@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Net6CqrsTemplate.Application.Contracts.Persistence.Writters;
-using Net6CqrsTemplate.Application.Mediator.ValueItem.Commands;
+using Net6CqrsTemplate.Application.Mediator.ValueItem.Commands.DeleteValueItem;
 
 namespace Net6CqrsTemplate.Application.Usecases.ValueItem.Commands
 {

@@ -1,8 +1,11 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Net6CqrsTemplate.Application.Dtos;
 using Net6CqrsTemplate.Application.Dtos.Value.Requests;
-using Net6CqrsTemplate.Application.Mediator.ValueItem.Commands;
+using Net6CqrsTemplate.Application.Mediator.ValueItem.Commands.CreateValueItem;
+using Net6CqrsTemplate.Application.Mediator.ValueItem.Commands.DeleteValueItem;
+using Net6CqrsTemplate.Application.Mediator.ValueItem.Commands.UpdateValueItem;
 using Net6CqrsTemplate.Application.Mediator.ValueItem.Queries;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -54,18 +57,33 @@ namespace Net6CqrsTemplate.API.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ValueItemDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateValueItem([FromBody] InsertValueItemRequestDto valueItemDto)
+        public async Task<IActionResult> CreateValueItem([FromBody] InsertValueItemRequestDto valueItemRequestDto)
         {
-            if (valueItemDto is null)
+
+            //if (valueItemRequestDto is null)
+            //{
+              //  return BadRequest();
+            //}
+
+            var result = await _mediator.Send(new CreateValueItemCommand { Name = valueItemRequestDto.Name });
+
+            return result.Match<IActionResult>(b =>
             {
-                return BadRequest();
-            }
+                return Ok(b);
 
-            var newValueItemId = await _mediator.Send(new CreateValueItemCommand { InsertValueItemRequestDto = valueItemDto });
+            }, exception =>
+            {
+                if (exception is ValidationException validationException)
+                {
+                    return BadRequest(validationException.Message);
+                }
 
-            return Ok(newValueItemId);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            });
+
+            //return Ok(newValueItem);
         }
 
         // PUT api/<ValuesController>/1
