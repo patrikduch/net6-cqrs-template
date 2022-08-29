@@ -62,26 +62,9 @@ namespace Net6CqrsTemplate.API.Controllers
         public async Task<IActionResult> CreateValueItem([FromBody] InsertValueItemRequestDto valueItemRequestDto)
         {
 
-            //if (valueItemRequestDto is null)
-            //{
-              //  return BadRequest();
-            //}
-
             var result = await _mediator.Send(new CreateValueItemCommand { Name = valueItemRequestDto.Name });
 
-            return result.Match<IActionResult>(b =>
-            {
-                return Ok(b);
-
-            }, exception =>
-            {
-                if (exception is ValidationException validationException)
-                {
-                    return BadRequest(validationException.Message);
-                }
-
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            });
+            return result.ToOKActionResult(r => r);
 
             //return Ok(newValueItem);
         }
