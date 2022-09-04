@@ -62,11 +62,7 @@ namespace Net6CqrsTemplate.API.Controllers
         public async Task<IActionResult> CreateValueItem([FromBody] InsertValueItemRequestDto valueItemRequestDto)
         {
 
-            var result = await _mediator.Send(new CreateValueItemCommand { Name = valueItemRequestDto.Name });
-
-            return result.ToOKActionResult(r => r);
-
-            //return Ok(newValueItem);
+            return (await _mediator.Send(new CreateValueItemCommand { Name = valueItemRequestDto.Name })).ToOKActionResult(r => r);
         }
 
         // PUT api/<ValuesController>/1

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Net6CqrsTemplate.Application.Contracts.Persistence.Uow;
 using Net6CqrsTemplate.Application.Contracts.Persistence.Writters;
 using Net6CqrsTemplate.Application.Dtos.Value.Requests;
@@ -19,8 +20,14 @@ namespace Net6CqrsTemplate.Persistence.Writers
 
         public async Task<ValueEntity?> CreateNewValueItem(InsertValueItemRequestDto newValueItem)
         {
+            if (newValueItem is null)
+            {
+                return null;
+            }
+
             var valueEntity = _mapper.Map<ValueEntity>(newValueItem);
-            valueEntity = await _uow.ValueRepository.Add(valueEntity);
+
+            _uow.Set<ValueEntity>().Add(valueEntity);
 
             var resultSign = await _uow.Complete();
 
@@ -34,14 +41,17 @@ namespace Net6CqrsTemplate.Persistence.Writers
 
         public async Task<ValueEntity> RemoveValueItem(int valueItemId)
         {
-            var valueEntity = await _uow.ValueRepository.Get(valueItemId);
+
+            var valueEntity = await _uow.Set<ValueEntity>()
+                .Where(v => v.Id == valueItemId)
+                .SingleOrDefaultAsync();
 
             if (valueEntity is null)
             {
                 throw new Exception("Cannot find entity with id: " + valueItemId);
             }
 
-            _uow.ValueRepository.Remove(valueEntity);
+            _uow.Set<ValueEntity>().Remove(valueEntity);
             await _uow.Complete();
 
             return valueEntity;
@@ -49,7 +59,9 @@ namespace Net6CqrsTemplate.Persistence.Writers
 
         public async Task<ValueEntity?> UpdateValueItem(int valueItemId, UpdateValueItemRequestDto? newValueItem)
         {
-            var valueEntity = await _uow.ValueRepository.Get(valueItemId);
+            var valueEntity = await _uow.Set<ValueEntity>()
+                 .Where(v => v.Id == valueItemId)
+                 .SingleOrDefaultAsync();
 
             if (valueEntity is null) throw new Exception("Entity with this id doesnt exists.");
 

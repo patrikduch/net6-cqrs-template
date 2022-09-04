@@ -20,8 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Contracts\Persistence\Uow\" />
     <Folder Include="Dtos\ZipFile\Requests\" />
     <Folder Include="Mediator\Zipfile\Queries\" />
+    <Folder Include="Enums\" />
     <Folder Include="Usecases\Zipfile\Queries\" />
   </ItemGroup>
 
