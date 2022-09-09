@@ -5,11 +5,11 @@ using Net6CqrsTemplate.Application.Contracts.Persistence.Services;
 using Net6CqrsTemplate.Application.Dtos;
 using Net6CqrsTemplate.Application.Mediator.ValueItem.Queries;
 
-public class GetValueListQueryUsecase : IRequestHandler<GetValueListRequest, IEnumerable<ValueItemDto>>
+public class GetValueItemListQueryUseCase : IRequestHandler<GetValueListRequest, IEnumerable<ValueItemDto>>
 {
     private readonly IValueService _valueService;
 
-    public GetValueListQueryUsecase(IValueService valueService)
+    public GetValueItemListQueryUseCase(IValueService valueService)
     {
         _valueService = valueService ?? throw new ArgumentNullException(nameof(valueService));
     }
